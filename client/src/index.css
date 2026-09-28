@@ -38,7 +38,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(115, 86, 220
 .app-shell { min-height: 100vh; display: flex; background: var(--canvas); }
 .sidebar { width: 248px; min-height: 100vh; flex: 0 0 248px; background: linear-gradient(180deg, #062e24 0%, #073b2d 100%); color: #f7fbf8; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; z-index: 20; }
 .brand-lockup { height: 145px; display: grid; place-items: center; padding: 18px 26px; }
-.brand-lockup img { width: 186px; height: auto; max-height: 102px; object-fit: contain; display: block; }
+.brand-lockup img { width: 186px; height: auto; max-height: 102px; object-fit: contain; display: block; background: #fcf8ef; border-radius: 10px; padding: 8px 12px; }
 .sidebar-rule { height: 1px; background: rgba(255,255,255,.12); margin: 0 16px 18px; }
 .main-nav { padding: 0 12px; }
 .nav-item, .subnav-item { width: 100%; color: rgba(242,249,245,.85); background: transparent; display: flex; align-items: center; gap: 11px; text-align: left; border-radius: 10px; cursor: pointer; transition: background .18s ease, color .18s ease, transform .18s ease; }
@@ -48,8 +48,9 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(115, 86, 220
 .nav-chevron { margin-left: auto; opacity: .8; }
 .nav-expand-icon { margin-left: auto; opacity: .82; transition: transform .2s cubic-bezier(.23,1,.32,1); }
 .nav-expand-icon.open { transform: rotate(180deg); }
-.subnav { margin: 2px 0 14px 16px; padding: 0 0 2px 16px; border-left: 1px solid rgba(255,255,255,.2); }
-.subnav-item { padding: 9px 10px; font-size: 13px; color: rgba(230,242,236,.72); }
+.subnav { margin: 3px 0 15px 16px; padding: 2px 0 4px 16px; border-left: 1px solid rgba(116,184,162,.48); display: flex; flex-direction: column; gap: 3px; }
+.subnav-item { position: relative; padding: 9px 10px; margin-right: 10px; font-size: 13px; color: rgba(230,242,236,.78); border-radius: 7px; }
+.subnav-item:not(:last-child)::after { content: ""; position: absolute; left: 10px; right: 20px; bottom: -2px; height: 1px; background: rgba(116,184,162,.34); }
 .subnav-item.selected { background: rgba(35,122,89,.45); color: #fff6d7; }
 .subnav-dot { width: 6px; height: 6px; border-radius: 50%; background: #74b8a2; flex: 0 0 6px; }
 .subnav-item.selected .subnav-dot { background: var(--gold); box-shadow: 0 0 0 4px rgba(197,161,75,.12); }
@@ -121,10 +122,16 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(115, 86, 220
 .metric-card p { margin: 1px 0 6px; color: var(--ink-soft); font-size: 12px; }
 .metric-card strong { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; color: var(--ink); }
 .metric-card span { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+.metric-badges { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 5px; margin-top: 7px; width: 100%; }
+.metric-card .metric-badge { display: flex; flex: 1 1 0; min-width: 0; justify-content: center; align-items: center; margin-top: 0; color: #4e8070; background: #eaf5ef; border-radius: 999px; padding: 4px 6px; font-size: 9px; font-weight: 700; line-height: 1.2; text-align: center; white-space: normal; }
+.metric-card .metric-badge:only-child { flex-basis: 100%; }
 .average-area-card { padding: 22px; }
 .area-values-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .area-value-item { border: 1px solid #e8eeea; border-radius: 11px; padding: 14px; background: #fbfdfb; }
+.area-value-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .area-value-item span { display: block; color: var(--blue-dark); font-size: 11px; font-weight: 700; }
+.area-value-item em { color: #4e8070; background: #eaf5ef; border-radius: 999px; padding: 3px 6px; font-size: 9px; font-style: normal; font-weight: 700; white-space: nowrap; }
+.area-value-detail { margin: 8px 0 0; color: var(--ink-soft); font-size: 11px; font-weight: 600; }
 .area-value-item strong { display: block; color: var(--ink); font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; margin-top: 10px; }
 .area-value-item small { display: block; color: var(--muted); font-size: 10px; margin-top: 5px; }
 .latitud-info-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr); gap: 18px; }
@@ -168,6 +175,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(115, 86, 220
 .data-table td:first-child { color: var(--ink); }
 .cell-subtext { display: block; color: var(--muted); font-size: 10px; margin-top: 3px; }
 .money-cell { color: var(--ink) !important; font-weight: 700; }
+.solar-cell { color: #876d26 !important; font-weight: 600; }
 .table-footer { display: flex; justify-content: space-between; gap: 12px; padding: 13px 2px; color: var(--muted); font-size: 11px; }
 .client-note { color: #4e8070; display: inline-flex; gap: 5px; align-items: center; }
 .empty-filter { padding: 25px; text-align: center; color: var(--muted); font-size: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -182,6 +190,9 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(115, 86, 220
 .listing-card-body h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 21px; line-height: 1.25; margin: 7px 0 8px; }
 .listing-card-body p:not(.section-kicker) { color: var(--ink-soft); font-size: 13px; line-height: 1.55; margin: 0 0 18px; }
 .listing-card-body .primary-button, .listing-card-body .outline-button { margin-top: auto; }
+.listing-links-grid { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
+.listing-condo-button { width: 100%; padding: 10px 12px; }
+.listing-condo-button:disabled { opacity: 1; cursor: default; transform: none; background: var(--green); }
 .listing-pending-icon { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); margin-bottom: 8px; }
 .empty-listings { min-height: 340px; display: grid; place-items: center; align-content: center; text-align: center; padding: 40px; }
 .empty-listings > * { max-width: 600px; }
