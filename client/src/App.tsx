@@ -39,7 +39,7 @@ const LINKA_LOGO_URL = `${import.meta.env.BASE_URL}linka-imoveis.png`;
 
 const condominiumTabs = ["Concept", "Latitud", "Mudrá", "Orygem"] as const;
 type Condominium = (typeof condominiumTabs)[number];
-type MainPage = "Informações" | "Condomínios" | "Anúncios ativos" | "Avalie com a gente";
+type MainPage = "Informações" | "Condomínios" | "Anúncios ativos" | "Divulgue com a gente";
 
 type SaleRow = {
   unit: string;
@@ -198,9 +198,9 @@ const conceptAreaRanges = [
 ];
 
 const conceptAreaMetadata = {
-  "151–155 m²": { category: "Tipo", detail: "3 suítes" },
-  "185 m²": { category: "Tipo", detail: "4 quartos" },
-  "204–206 m²": { category: "Tipo", detail: "4 suítes" },
+  "151–155 m²": { category: "Apartamento", detail: "3 suítes" },
+  "185 m²": { category: "Apartamento", detail: "4 quartos" },
+  "204–206 m²": { category: "Apartamento", detail: "4 suítes" },
   "259–287 m²": { category: "Cobertura", detail: "3 suítes" },
   "413–414 m²": { category: "Cobertura", detail: "4 suítes" },
 };
@@ -215,9 +215,9 @@ const latitudAreaRanges = [
 ];
 
 const latitudAreaMetadata = {
-  "120–125 m²": { category: "Tipo", detail: "3 quartos" },
-  "153–156 m²": { category: "Tipo", detail: "4 quartos" },
-  "184–187 m²": { category: "Tipo", detail: "4 quartos" },
+  "120–125 m²": { category: "Apartamento", detail: "3 quartos" },
+  "153–156 m²": { category: "Apartamento", detail: "4 quartos" },
+  "184–187 m²": { category: "Apartamento", detail: "4 quartos" },
   "180–183 m²": { category: "Cobertura", detail: "3 suítes" },
   "309 m²": { category: "Cobertura", detail: "4 suítes" },
   "372 m²": { category: "Cobertura", detail: "4 suítes" },
@@ -230,8 +230,8 @@ const mudraAreaRanges = [
 ];
 
 const mudraAreaMetadata = {
-  "78–80 m²": { category: "Tipo", detail: "2 quartos" },
-  "91–106 m²": { category: "Tipo", detail: "3 quartos" },
+  "78–80 m²": { category: "Apartamento", detail: "2 quartos" },
+  "91–106 m²": { category: "Apartamento", detail: "3 quartos" },
   "177–221 m²": { category: "Cobertura", detail: "3 quartos" },
 };
 
@@ -244,9 +244,9 @@ const orygemAreaRanges = [
 ];
 
 const orygemAreaMetadata = {
-  "120–126 m²": { category: "Tipo", detail: "3 quartos" },
-  "153–158 m²": { category: "Tipo", detail: "4 quartos" },
-  "187–190 m²": { category: "Tipo", detail: "4 quartos" },
+  "120–126 m²": { category: "Apartamento", detail: "3 quartos" },
+  "153–158 m²": { category: "Apartamento", detail: "4 quartos" },
+  "187–190 m²": { category: "Apartamento", detail: "4 quartos" },
   "184–188 m²": { category: "Cobertura", detail: "3 suítes" },
   "314–378 m²": { category: "Cobertura", detail: "4 suítes" },
 };
@@ -308,7 +308,7 @@ const navIcons: Record<MainPage, LucideIcon> = {
   Informações: BarChart3,
   Condomínios: Building2,
   "Anúncios ativos": Home,
-  "Avalie com a gente": Handshake,
+  "Divulgue com a gente": Handshake,
 };
 
 function condoToSlug(condo: Condominium) {
@@ -327,7 +327,7 @@ function getRouteState(path: string): { page: MainPage; condo: Condominium } {
   if (condo) return { page: "Condomínios", condo };
   if (path === "/condominios") return { page: "Condomínios", condo: "Latitud" };
   if (path === "/anuncios-ativos") return { page: "Anúncios ativos", condo: "Latitud" };
-  if (path === "/avalie-com-a-gente") return { page: "Avalie com a gente", condo: "Latitud" };
+  if (path === "/avalie-com-a-gente") return { page: "Divulgue com a gente", condo: "Latitud" };
   return { page: "Informações", condo: "Latitud" };
 }
 
@@ -344,7 +344,7 @@ function DashboardApp() {
     if (activePage === "Informações") return "Informações";
     if (activePage === "Condomínios") return "Condomínios";
     if (activePage === "Anúncios ativos") return "Anúncios ativos";
-    return "Avalie com a gente";
+    return "Divulgue com a gente";
   }, [activePage]);
 
   const navigate = (page: MainPage) => {
@@ -404,9 +404,9 @@ function DashboardApp() {
             <Home size={18} />
             <span>Anúncios ativos</span>
           </button>
-          <button className={`nav-item ${activePage === "Avalie com a gente" ? "active" : ""}`} onClick={() => navigate("Avalie com a gente")}>
+          <button className={`nav-item ${activePage === "Divulgue com a gente" ? "active" : ""}`} onClick={() => navigate("Divulgue com a gente")}>
             <Handshake size={18} />
-            <span>Avalie com a gente</span>
+            <span>Divulgue com a gente</span>
           </button>
         </nav>
         <div className="sidebar-footer">
@@ -425,7 +425,7 @@ function DashboardApp() {
         {activePage === "Informações" && <InformationPage />}
         {activePage === "Condomínios" && (showingCondo ? <CondominiumPage activeCondo={activeCondo} setActiveCondo={navigateCondo} /> : <CondominiumsPage onSelect={navigateCondo} />)}
         {activePage === "Anúncios ativos" && <ActiveListingsPage />}
-        {activePage === "Avalie com a gente" && <ContactPage />}
+        {activePage === "Divulgue com a gente" && <ContactPage />}
       </main>
     </div>
   );
@@ -438,7 +438,7 @@ function InformationPage() {
         <div className="intro-icon"><Info size={25} /></div>
         <div>
           <p className="section-kicker">O que é</p>
-          <h2>Quadro de anúncios de imóveis digital</h2>
+          <h2>Quadro de anúncios na palma de sua mão</h2>
           <p>Esta plataforma centraliza informações dos empreendimentos e suas unidades em um só lugar. Cada subaba apresenta exclusivamente os dados do respectivo condomínio.</p>
         </div>
       </section>
@@ -676,8 +676,8 @@ function ActiveListingsPage() {
 function ContactPage() {
   return (
     <div className="content-stack">
-      <section className="intro-banner contact-intro"><div className="intro-icon"><Handshake size={25} /></div><div><p className="section-kicker">Canal direto</p><h2>Avalie com a gente</h2><p>Um canal direto para moradores, parceiros e administradoras entrarem em contato com a Bluedoor após consultar as informações.</p></div></section>
-      <section className="surface-card contact-card"><div className="contact-card-icon"><MessageCircle size={27} /></div><div><p className="section-kicker">Contato Bluedoor</p><h2>Fale diretamente com a nossa equipe</h2><p className="contact-placeholder">Para dúvidas, oportunidades, atualizações ou informações sobre os empreendimentos, use o telefone oficial ou acesse os sites da Bluedoor Imóveis.</p><div className="contact-actions"><a className="primary-button" href="https://wa.me/5521974050590" target="_blank" rel="noreferrer"><WhatsAppIcon size={16} /> (21) 97405-0590</a><a className="primary-button" href="tel:+5521974050590"><Phone size={16} /> (21) 97405-0590</a><a className="outline-button" href="https://bluedoorimoveis.com.br/" target="_blank" rel="noreferrer"><DoorOpen size={16} /> Site de particulares</a><a className="outline-button launch-link" href="https://bluedoorlancamentos.com.br/" target="_blank" rel="noreferrer"><span className="door-launch-icon"><DoorOpen size={16} /><Sparkles size={9} /></span> Site de lançamentos</a></div></div></section>
+      <section className="intro-banner contact-intro"><div className="intro-icon"><Handshake size={25} /></div><div><p className="section-kicker">Canal direto</p><h2>Divulgue com a gente</h2><p>Apresente sua oportunidade à equipe da Bluedoor e aumente a visibilidade do seu imóvel para corretores e moradores que consultam a plataforma.</p></div></section>
+      <section className="surface-card contact-card"><div className="contact-card-icon"><MessageCircle size={27} /></div><div><p className="section-kicker">Sua oportunidade em destaque</p><h2>Divulgue seu imóvel</h2><p className="contact-placeholder">Tem uma unidade ou oportunidade para anunciar? Fale com a nossa equipe para entender como apresentar seu imóvel a quem já busca informações e novas possibilidades na plataforma.</p><div className="contact-actions"><a className="primary-button" href="https://wa.me/5521974050590" target="_blank" rel="noreferrer"><WhatsAppIcon size={16} /> Falar pelo WhatsApp</a><a className="primary-button" href="tel:+5521974050590"><Phone size={16} /> Ligar para a equipe</a><a className="outline-button" href="https://bluedoorimoveis.com.br/" target="_blank" rel="noreferrer"><DoorOpen size={16} /> Site de particulares</a><a className="outline-button launch-link" href="https://bluedoorlancamentos.com.br/" target="_blank" rel="noreferrer"><span className="door-launch-icon"><DoorOpen size={16} /><Sparkles size={9} /></span> Site de lançamentos</a></div></div></section>
       <div className="audience-grid contact-audience-grid"><div className="audience-card audience-brand-card"><img className="audience-brand-logo" src={LOGO_URL} alt="Bluedoor Imóveis" /><p className="section-kicker">Bluedoor Imóveis</p><h3>Conte com a nossa equipe</h3><p>Informação clara para moradores, parceiros e administradoras.</p></div><AudienceCard icon={Users} title="Moradores" text="Tire dúvidas sobre as informações do seu empreendimento." /><AudienceCard icon={Handshake} title="Parceiros" text="Fale com a equipe sobre uma unidade ou oportunidade." /><AudienceCard icon={Landmark} title="Administradoras" text="Solicite alinhamentos ou atualizações de dados." /></div>
     </div>
   );
@@ -733,7 +733,7 @@ function AverageAreaValues({ values, ranges: customRanges, transactionCounts: cu
     <section className="surface-card average-area-card">
       <div className="section-heading"><div><p className="section-kicker">Referência de valores</p><h2>Valor médio por metragem</h2></div><Ruler size={21} /></div>
       <div className="area-values-grid">
-        {ranges.map((range) => <div className="area-value-item" key={range}><div className="area-value-heading"><span>{range}</span><em>{metadata?.[range]?.category ?? (coverageAreaLabels.has(range) ? "Cobertura" : "Tipo")}</em></div>{metadata?.[range]?.detail && <p className="area-value-detail">{metadata[range].detail}</p>}<strong>{values?.[range] ?? "A informar"}</strong><small>{values?.[range] === "Sem dados recentes" ? "nenhuma transação recente" : values?.[range] && values[range] !== "A informar" ? `média de ${transactionCounts[range]} transações` : "valor médio da faixa"}</small></div>)}
+        {ranges.map((range) => <div className="area-value-item" key={range}><div className="area-value-heading"><span>{range}</span><em>{metadata?.[range]?.category ?? (coverageAreaLabels.has(range) ? "Cobertura" : "Apartamento")}</em></div>{metadata?.[range]?.detail && <p className="area-value-detail">{metadata[range].detail}</p>}<strong>{values?.[range] ?? "A informar"}</strong><small>{values?.[range] === "Sem dados recentes" ? "nenhuma transação recente" : values?.[range] && values[range] !== "A informar" ? `média de ${transactionCounts[range]} transações` : "valor médio da faixa"}</small></div>)}
       </div>
     </section>
   );
