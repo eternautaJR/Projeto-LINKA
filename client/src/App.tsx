@@ -337,7 +337,7 @@ function DashboardApp() {
   const activePage = routeState.page;
   const activeCondo = routeState.condo;
   const showingCondo = location.startsWith("/empreendimentos/");
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 800px)").matches);
   const [showCondominiumSubnav, setShowCondominiumSubnav] = useState(showingCondo);
 
   const pageTitle = useMemo(() => {
@@ -366,8 +366,8 @@ function DashboardApp() {
 
   return (
     <div className="app-shell">
-      <button className="mobile-menu-button" onClick={() => setShowSidebar((current) => !current)} aria-label="Abrir menu">
-        <ListChecks size={19} />
+      <button className="mobile-menu-button" onClick={() => setShowSidebar((current) => !current)} aria-label={showSidebar ? "Fechar menu" : "Abrir menu"} aria-expanded={showSidebar}>
+        <ListChecks size={25} strokeWidth={2.4} />
       </button>
       <aside className={`sidebar ${showSidebar ? "sidebar-open" : ""}`}>
         <div className="brand-lockup">
