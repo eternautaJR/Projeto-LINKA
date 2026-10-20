@@ -258,6 +258,22 @@ function salesInAreaRange(sales: SaleRow[], minimum: number, maximum: number) {
   });
 }
 
+function parseSaleValue(value: string) {
+  return Number.parseFloat(value.replace(/R\$\s?/g, "").replace(/\./g, "").replace(",", "."));
+}
+
+function parseSaleArea(area: string) {
+  return Number.parseFloat(area.replace(" m²", "").replace(",", "."));
+}
+
+function averagePricePerSquareMeter(sales: SaleRow[]) {
+  if (sales.length === 0) return "Sem dados recentes";
+  const totalValue = sales.reduce((sum, sale) => sum + parseSaleValue(sale.value), 0);
+  const totalArea = sales.reduce((sum, sale) => sum + parseSaleArea(sale.area), 0);
+  if (totalArea === 0) return "Sem dados recentes";
+  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(totalValue / totalArea);
+}
+
 const orygemAverageValues = Object.fromEntries(orygemAreaRanges.map(({ label, minimum, maximum }) => {
   const matchingSales = salesInAreaRange(orygemSales, minimum, maximum);
   if (matchingSales.length === 0) return [label, "Sem dados recentes"];
@@ -526,6 +542,7 @@ function CondominiumPreparingPage({ activeCondo, setActiveCondo }: { activeCondo
         <Metric icon={CalendarDays} label="Entrega e idade" value={activeCondo === "Orygem" ? "06/2024" : activeCondo === "Concept" ? "05/2025" : "06/2023"} helper={activeCondo === "Orygem" ? elapsedAgeFrom(5, 2024) : activeCondo === "Concept" ? elapsedAgeFrom(4, 2025) : elapsedAgeFrom(5, 2023)} />
       </section>
       {activeCondo === "Orygem" ? <AverageAreaValues ranges={orygemAreaRanges.map((range) => range.label)} values={orygemAverageValues} transactionCounts={orygemTransactionCounts} metadata={orygemAreaMetadata} /> : activeCondo === "Concept" ? <AverageAreaValues ranges={conceptAreaRanges.map((range) => range.label)} values={conceptAverageValues} transactionCounts={conceptTransactionCounts} metadata={conceptAreaMetadata} /> : <AverageAreaValues ranges={mudraAreaRanges.map((range) => range.label)} values={mudraAverageValues} transactionCounts={mudraTransactionCounts} metadata={mudraAreaMetadata} />}
+      {activeCondo === "Orygem" ? <PricePerSquareMeter sales={orygemSales} ranges={orygemAreaRanges} /> : activeCondo === "Concept" ? <PricePerSquareMeter sales={conceptSales} ranges={conceptAreaRanges} /> : <PricePerSquareMeter sales={mudraSales} ranges={mudraAreaRanges} />}
       {activeCondo === "Orygem" ? <SalesHistory condo="Orygem" sales={orygemSales} /> : activeCondo === "Concept" ? <SalesHistory condo="Concept" sales={conceptSales} /> : <SalesHistory condo="Mudrá" sales={mudraSales} />}
     </div>
   );
@@ -620,6 +637,7 @@ function LatitudPage({ activeCondo, setActiveCondo }: { activeCondo: Condominium
         <Metric icon={CalendarDays} label="Entrega e idade" value="04/2023" helper={elapsedAgeFrom(3, 2023)} />
       </section>
       <AverageAreaValues ranges={latitudAreaRanges.map((range) => range.label)} values={latitudAverageValues} transactionCounts={latitudTransactionCounts} metadata={latitudAreaMetadata} />
+      <PricePerSquareMeter sales={latitudSales} ranges={latitudAreaRanges} />
       <section className="surface-card sales-card">
         <div className="section-heading section-heading-wrap"><div><p className="section-kicker">Histórico de vendas</p><h2>Vendas desde janeiro de 2025</h2><p className="section-description">Histórico do Latitud com unidade, bloco, data, valor, área, preço/m², posição e orientação solar. A partir de janeiro de 2025, cada transação aparece individualmente.</p></div><div className="table-actions"><label className="search-box"><Search size={16} /><input value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Buscar unidade ou bloco" /></label><button className="filter-button"><SlidersHorizontal size={16} /> Filtros</button></div></div>
         <div className="data-table-wrap"><table className="data-table"><thead><tr><th><SortButton label="Unidade" sortKey="unit" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th><th><SortButton label="Data da venda" sortKey="date" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th><th><SortButton label="Valor" sortKey="value" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th><th><SortButton label="Área" sortKey="area" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th><th><SortButton label="Preço/m²" sortKey="pricePerM2" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th><th><SortButton label="Posição" sortKey="position" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th><th><SortButton label="Orientação solar" sortKey="solarOrientation" activeKey={sortKey} direction={sortDirection} onClick={toggleSort} /></th></tr></thead><tbody>{sortedSales.map((sale, index) => <tr key={`${sale.unit}-${sale.date}-${sale.value}-${index}`}><td><strong>{sale.unit}</strong><span className="cell-subtext">{sale.complement}</span></td><td>{sale.date}</td><td className="money-cell">{sale.value}</td><td>{sale.area}</td><td>{sale.pricePerM2}</td><td>{sale.position}</td><td className="solar-cell">{sale.solarOrientation ?? "A informar"}</td></tr>)}</tbody></table></div>
@@ -735,6 +753,24 @@ function AverageAreaValues({ values, ranges: customRanges, transactionCounts: cu
       <div className="section-heading"><div><p className="section-kicker">Referência de valores</p><h2>Valor médio por metragem</h2></div><Ruler size={21} /></div>
       <div className="area-values-grid">
         {ranges.map((range) => <div className="area-value-item" key={range}><div className="area-value-heading"><span>{range}</span><em>{metadata?.[range]?.category ?? (coverageAreaLabels.has(range) ? "Cobertura" : "Apartamento")}</em></div>{metadata?.[range]?.detail && <p className="area-value-detail">{metadata[range].detail}</p>}<strong>{values?.[range] ?? "A informar"}</strong><small>{values?.[range] === "Sem dados recentes" ? "nenhuma transação recente" : values?.[range] && values[range] !== "A informar" ? `média de ${transactionCounts[range]} transações` : "valor médio da faixa"}</small></div>)}
+      </div>
+    </section>
+  );
+}
+
+function PricePerSquareMeter({ sales, ranges }: { sales: SaleRow[]; ranges: Array<{ label: string; minimum: number; maximum: number }> }) {
+  const generalAverage = averagePricePerSquareMeter(sales);
+  return (
+    <section className="surface-card price-m2-card">
+      <div className="section-heading"><div><p className="section-kicker">Referência de mercado</p><h2>Valor médio do m²</h2></div><Ruler size={21} /></div>
+      <div className="price-m2-overview">
+        <div className="price-m2-general"><span>M² geral do condomínio</span><strong>{generalAverage}</strong><small>média ponderada de {sales.length} transações</small></div>
+        <div className="price-m2-ranges">
+          {ranges.map((range) => {
+            const matchingSales = salesInAreaRange(sales, range.minimum, range.maximum);
+            return <div className="price-m2-item" key={range.label}><span>{range.label}</span><strong>{averagePricePerSquareMeter(matchingSales)}</strong><small>{matchingSales.length === 0 ? "nenhuma transação recente" : `média de ${matchingSales.length} transações`}</small></div>;
+          })}
+        </div>
       </div>
     </section>
   );
