@@ -435,7 +435,6 @@ function DashboardApp() {
       <main className="main-area">
         <header className="topbar">
           <div>
-            <span className="eyebrow">BLUEDOOR IMÓVEIS</span>
             <h1>{pageTitle}</h1>
           </div>
         </header>
