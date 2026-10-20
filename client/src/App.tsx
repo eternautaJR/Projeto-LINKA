@@ -372,6 +372,7 @@ function DashboardApp() {
       <aside className={`sidebar ${showSidebar ? "sidebar-open" : ""}`}>
         <div className="brand-lockup">
           <img src={LINKA_LOGO_URL} alt="Linka Imóveis" />
+          <span className="brand-tagline">Seu Quadro de anúncios digital</span>
         </div>
         <div className="sidebar-rule" />
         <nav className="main-nav" aria-label="Navegação principal">
