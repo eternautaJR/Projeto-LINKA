@@ -115,6 +115,9 @@ const conceptSales: SaleRow[] = [
 ];
 
 const mudraSales: SaleRow[] = [
+  { unit: "Blc 1 Apt 806", date: "09/2026", value: "R$ 1.050.000,00", pricePerM2: "R$ 13.291,14", area: "79 m²", complement: "Bloco 1 • Apt 806", position: "Fundos" },
+  { unit: "Blc 2 Apt 801", date: "09/2026", value: "R$ 1.420.000,00", pricePerM2: "R$ 15.434,78", area: "92 m²", complement: "Bloco 2 • Apt 801", position: "Fundos" },
+  { unit: "Blc 1 Apt 504", date: "09/2026", value: "R$ 964.487,02", pricePerM2: "R$ 12.056,09", area: "80 m²", complement: "Bloco 1 • Apt 504", position: "Fundos" },
   { unit: "Blc 1 Apt 505", date: "08/2026", value: "R$ 1.250.000,00", pricePerM2: "R$ 16.025,64", area: "78 m²", complement: "Bloco 1 • Apt 505", position: "Fundos", solarOrientation: "Nascente" },
   { unit: "Blc 1 Apt 410", date: "08/2026", value: "R$ 950.000,00", pricePerM2: "R$ 12.025,32", area: "79 m²", complement: "Bloco 1 • Apt 410", position: "Frente", solarOrientation: "Poente" },
   { unit: "Blc 2 Apt 602", date: "08/2026", value: "R$ 1.450.000,00", pricePerM2: "R$ 13.679,25", area: "106 m²", complement: "Bloco 2 • Apt 602", position: "Fundos", solarOrientation: "Nascente" },
