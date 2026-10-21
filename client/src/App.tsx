@@ -104,13 +104,6 @@ const latitudSales: SaleRow[] = [
 ];
 
 const conceptSales: SaleRow[] = [
-  { unit: "Blc 1 Apt 0401", date: "08/2026", value: "R$ 2.530.612,30", pricePerM2: "R$ 13.678,99", area: "185 m²", complement: "Bloco 1 • Apt 0401", position: "Fundos", solarOrientation: "Poente" },
-  { unit: "Blc 1 Apt 0605", date: "05/2026", value: "R$ 2.035.994,00", pricePerM2: "R$ 13.307,15", area: "153 m²", complement: "Bloco 1 • Apt 0605", position: "Fundos", solarOrientation: "Poente" },
-  { unit: "Blc 1 Apt 0903", date: "05/2026", value: "R$ 3.595.076,40", pricePerM2: "R$ 13.880,60", area: "259 m²", complement: "Bloco 1 • Apt 0903", position: "Frente", solarOrientation: "Nascente" },
-  { unit: "Blc 1 Apt 0804", date: "05/2026", value: "R$ 2.187.360,00", pricePerM2: "R$ 14.112,00", area: "155 m²", complement: "Bloco 1 • Apt 0804", position: "Frente", solarOrientation: "Poente" },
-  { unit: "Blc 2 Apt 0301", date: "03/2026", value: "R$ 2.866.750,00", pricePerM2: "R$ 13.984,15", area: "205 m²", complement: "Bloco 2 • Apt 0301", position: "Fundos", solarOrientation: "Nascente" },
-  { unit: "Blc 1 Apt 0302", date: "02/2026", value: "R$ 2.513.257,60", pricePerM2: "R$ 13.585,18", area: "185 m²", complement: "Bloco 1 • Apt 0302", position: "Frente", solarOrientation: "Nascente" },
-  { unit: "Blc 2 Apt 0603", date: "01/2026", value: "R$ 2.848.197,44", pricePerM2: "R$ 13.893,65", area: "205 m²", complement: "Bloco 2 • Apt 0603", position: "Fundos", solarOrientation: "Poente" },
 ];
 
 const mudraSales: SaleRow[] = [
