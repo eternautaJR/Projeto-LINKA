@@ -576,7 +576,7 @@ function CondominiumPreparingPage({ activeCondo, setActiveCondo }: { activeCondo
       <section className="metrics-grid">
         <Metric icon={Building2} label="Total de unidades" value={activeCondo === "Orygem" ? "192" : activeCondo === "Concept" ? "77" : "144"} helper={activeCondo === "Orygem" ? "Bloco 1 – 60 · Bloco 2 – 36 · Bloco 3 – 60 · Bloco 4 – 36" : activeCondo === "Concept" ? "Bloco 1 – 43 · Bloco 2 – 34" : "Bloco 1 – 80 · Bloco 2 – 64"} badges={activeCondo === "Orygem" ? ["Blocos 1 e 3 · 11 andares", "Blocos 2 e 4 · 10 andares"] : activeCondo === "Concept" ? ["9 andares"] : ["9 andares"]} />
         <Metric icon={Ruler} label="Área total do condomínio" value={activeCondo === "Orygem" ? "17.000 m²" : activeCondo === "Concept" || activeCondo === "Mudrá" ? "8.573 m²" : "A informar"} helper="" />
-        <Metric icon={Gauge} label="Taxa de ocupação" value="A informar" helper="" />
+        <Metric icon={Gauge} label="Taxa de ocupação" value={activeCondo === "Orygem" ? "67%" : activeCondo === "Concept" ? "35%" : "98%"} helper="" />
         <Metric icon={CalendarDays} label="Entrega e idade" value={activeCondo === "Orygem" ? "06/2024" : activeCondo === "Concept" ? "05/2025" : "06/2023"} helper={activeCondo === "Orygem" ? elapsedAgeFrom(5, 2024) : activeCondo === "Concept" ? elapsedAgeFrom(4, 2025) : elapsedAgeFrom(5, 2023)} />
       </section>
       {activeCondo === "Orygem" ? <AverageAreaValues ranges={orygemAreaRanges.map((range) => range.label)} values={orygemAverageValues} transactionCounts={orygemTransactionCounts} metadata={orygemAreaMetadata} /> : activeCondo === "Concept" ? <AverageAreaValues ranges={conceptAreaRanges.map((range) => range.label)} values={conceptAverageValues} transactionCounts={conceptTransactionCounts} metadata={conceptAreaMetadata} /> : <AverageAreaValues ranges={mudraAreaRanges.map((range) => range.label)} values={mudraAverageValues} transactionCounts={mudraTransactionCounts} metadata={mudraAreaMetadata} />}
@@ -671,7 +671,7 @@ function LatitudPage({ activeCondo, setActiveCondo }: { activeCondo: Condominium
       <section className="metrics-grid">
         <Metric icon={Building2} label="Total de unidades" value="192" helper="Bloco 1 – 60 · Bloco 2 – 36 · Bloco 3 – 60 · Bloco 4 – 36" badges={["Blocos 1 e 3 · 11 andares", "Blocos 2 e 4 · 10 andares"]} />
         <Metric icon={Ruler} label="Área total do condomínio" value="17.000 m²" helper="" />
-        <Metric icon={Gauge} label="Taxa de ocupação" value="A informar" helper="" />
+        <Metric icon={Gauge} label="Taxa de ocupação" value="94,12%" helper="" />
         <Metric icon={CalendarDays} label="Entrega e idade" value="04/2023" helper={elapsedAgeFrom(3, 2023)} />
       </section>
       <AverageAreaValues ranges={latitudAreaRanges.map((range) => range.label)} values={latitudAverageValues} transactionCounts={latitudTransactionCounts} metadata={latitudAreaMetadata} />
