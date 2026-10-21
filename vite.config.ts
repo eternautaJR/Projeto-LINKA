@@ -205,8 +205,9 @@ function vitePluginStorageProxy(): Plugin {
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
-export default defineConfig({
-  base: "/Projeto-LINKA/",
+export default defineConfig(({ command }) => ({
+  // O preview do Manus abre na raiz; o GitHub Pages precisa do subcaminho do repositório.
+  base: command === "build" ? "/Projeto-LINKA/" : "/",
   plugins,
   resolve: {
     alias: {
@@ -239,4 +240,4 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
-});
+}));
