@@ -14,6 +14,7 @@ import {
   ExternalLink,
   FileText,
   Gauge,
+  HardHat,
   Handshake,
   Home,
   Info,
@@ -578,6 +579,7 @@ function CondominiumPreparingPage({ activeCondo, setActiveCondo }: { activeCondo
         <Metric icon={Ruler} label="Área total do condomínio" value={activeCondo === "Orygem" ? "17.000 m²" : activeCondo === "Concept" || activeCondo === "Mudrá" ? "8.573 m²" : "A informar"} helper="" />
         <Metric icon={Gauge} label="Taxa de ocupação" value={activeCondo === "Orygem" ? "67%" : activeCondo === "Concept" ? "35%" : "98%"} helper="" />
         <Metric icon={CalendarDays} label="Entrega e idade" value={activeCondo === "Orygem" ? "06/2024" : activeCondo === "Concept" ? "05/2025" : "06/2023"} helper={activeCondo === "Orygem" ? elapsedAgeFrom(5, 2024) : activeCondo === "Concept" ? elapsedAgeFrom(4, 2025) : elapsedAgeFrom(5, 2023)} />
+        <Metric icon={HardHat} label="Construtora" value="Cyrela" helper="" />
       </section>
       {activeCondo === "Orygem" ? <AverageAreaValues ranges={orygemAreaRanges.map((range) => range.label)} values={orygemAverageValues} transactionCounts={orygemTransactionCounts} metadata={orygemAreaMetadata} /> : activeCondo === "Concept" ? <AverageAreaValues ranges={conceptAreaRanges.map((range) => range.label)} values={conceptAverageValues} transactionCounts={conceptTransactionCounts} metadata={conceptAreaMetadata} /> : <AverageAreaValues ranges={mudraAreaRanges.map((range) => range.label)} values={mudraAverageValues} transactionCounts={mudraTransactionCounts} metadata={mudraAreaMetadata} />}
       {activeCondo === "Orygem" ? <PricePerSquareMeter sales={orygemSales} ranges={orygemAreaRanges} /> : activeCondo === "Concept" ? <PricePerSquareMeter sales={conceptSales} ranges={conceptAreaRanges} /> : <PricePerSquareMeter sales={mudraSales} ranges={mudraAreaRanges} />}
@@ -673,6 +675,7 @@ function LatitudPage({ activeCondo, setActiveCondo }: { activeCondo: Condominium
         <Metric icon={Ruler} label="Área total do condomínio" value="17.000 m²" helper="" />
         <Metric icon={Gauge} label="Taxa de ocupação" value="94,12%" helper="" />
         <Metric icon={CalendarDays} label="Entrega e idade" value="04/2023" helper={elapsedAgeFrom(3, 2023)} />
+        <Metric icon={HardHat} label="Construtora" value="Cyrela" helper="" />
       </section>
       <AverageAreaValues ranges={latitudAreaRanges.map((range) => range.label)} values={latitudAverageValues} transactionCounts={latitudTransactionCounts} metadata={latitudAreaMetadata} />
       <PricePerSquareMeter sales={latitudSales} ranges={latitudAreaRanges} />
