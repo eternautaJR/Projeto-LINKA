@@ -210,7 +210,7 @@ const orygemSales: SaleRow[] = [
   { unit: "Blc 3 Apt 0602", date: "02/2026", value: "R$ 1.720.538,69", pricePerM2: "R$ 13.988,12", area: "123 m²", complement: "Bloco 3 • Apt 0602", position: "Fundos", solarOrientation: "Nascente" },
   { unit: "Blc 3 Apt 1002", date: "02/2026", value: "R$ 1.930.906,20", pricePerM2: "R$ 15.698,42", area: "123 m²", complement: "Bloco 3 • Apt 1002", position: "Fundos", solarOrientation: "Nascente" },
   { unit: "Blc 3 Apt 0805", date: "02/2026", value: "R$ 1.713.241,14", pricePerM2: "R$ 13.816,46", area: "124 m²", complement: "Bloco 3 • Apt 0805", position: "Fundos", solarOrientation: "Poente" },
-  { unit: "Blc 4 Apt 102", date: "01/2026", value: "R$ 2.884.479,90", pricePerM2: "R$ 15.181,47", area: "190 m²", complement: "Bloco 4 • Apt 102", position: "Fundos" },
+  { unit: "Blc 4 Apt 102", date: "01/2026", value: "R$ 2.884.479,90", pricePerM2: "R$ 15.181,47", area: "190 m²", complement: "Bloco 4 • Apt 102", position: "Fundos", solarOrientation: "Poente" },
   { unit: "Blc 2 Apt 304", date: "01/2026", value: "R$ 2.213.806,75", pricePerM2: "R$ 14.191,07", area: "156 m²", complement: "Bloco 2 • Apt 304", position: "Fundos", solarOrientation: "Nascente" },
   { unit: "Blc 2 Apt 802", date: "12/2025", value: "R$ 1.863.552,00", pricePerM2: "R$ 11.794,63", area: "158 m²", complement: "Bloco 2 • Apt 802", position: "Fundos", solarOrientation: "Poente" },
   { unit: "Blc 4 Apt 803", date: "12/2025", value: "R$ 2.485.140,51", pricePerM2: "R$ 13.079,69", area: "190 m²", complement: "Bloco 4 • Apt 803", position: "Fundos", solarOrientation: "Poente" },
